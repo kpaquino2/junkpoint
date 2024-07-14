@@ -1,15 +1,18 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:junkpoint/core/error/exceptions.dart';
+import 'package:junkpoint/features/auth/data/models/client_model.dart';
+import 'package:junkpoint/features/auth/data/models/shop_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
-  Future<String> signUpWithEmailPassword({
+  Future<Either<ClientModel, ShopModel>> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
     required String role,
   });
 
-  Future<String> loginWithEmailPassword({
+  Future<Either<ClientModel, ShopModel>> loginWithEmailPassword({
     required String email,
     required String password,
   });
@@ -20,7 +23,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this.supabaseClient);
 
   @override
-  Future<String> signUpWithEmailPassword({
+  Future<Either<ClientModel, ShopModel>> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
@@ -40,14 +43,16 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw const ServerException("User is null!");
       }
 
-      return response.user!.id;
+      if (role == 'client')
+        return left(ClientModel.fromJSON(response.user!.toJson()));
+      return right(ShopModel.fromJSON(response.user!.toJson()));
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<String> loginWithEmailPassword({
+  Future<Either<ClientModel, ShopModel>> loginWithEmailPassword({
     required String email,
     required String password,
   }) {

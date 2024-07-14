@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:junkpoint/features/auth/domain/entities/client.dart';
+import 'package:junkpoint/features/auth/domain/entities/shop.dart';
 import 'package:junkpoint/features/auth/domain/usecases/user_sign_up.dart';
 
 part 'auth_event.dart';
@@ -13,6 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   })  : _userSignUp = userSignUp,
         super(AuthInitial()) {
     on<AuthSignUp>((event, emit) async {
+      emit(AuthLoading());
       final res = await _userSignUp(
         UserSignUpParams(
           email: event.email,

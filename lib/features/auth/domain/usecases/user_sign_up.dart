@@ -1,14 +1,17 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:junkpoint/core/error/failure.dart';
 import 'package:junkpoint/core/usercase/usecase.dart';
+import 'package:junkpoint/features/auth/domain/entities/client.dart';
+import 'package:junkpoint/features/auth/domain/entities/shop.dart';
 import 'package:junkpoint/features/auth/domain/repository/auth_repository.dart';
 
-class UserSignUp implements UseCase<String, UserSignUpParams> {
+class UserSignUp implements UseCase<Either<Client, Shop>, UserSignUpParams> {
   final AuthRepository authRepository;
   const UserSignUp(this.authRepository);
 
   @override
-  Future<Either<Failure, String>> call(UserSignUpParams params) async {
+  Future<Either<Failure, Either<Client, Shop>>> call(
+      UserSignUpParams params) async {
     return await authRepository.signUpWithEmailPassword(
       name: params.name,
       email: params.email,

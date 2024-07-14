@@ -10,7 +10,7 @@ final class AuthInitial extends AuthState {}
 final class AuthLoading extends AuthState {}
 
 final class AuthSuccess extends AuthState {
-  final String uid;
+  final Either<Client, Shop> uid;
   const AuthSuccess(this.uid);
 }
 
