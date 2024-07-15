@@ -7,6 +7,9 @@ import 'package:junkpoint/features/auth/presentation/pages/client_signup_page.da
 import 'package:junkpoint/features/auth/presentation/pages/login_page.dart';
 import 'package:junkpoint/features/auth/presentation/pages/shop_signup_page.dart';
 
+// TODO verify email
+// TODO sign up using other platforms
+
 class StartPage extends StatelessWidget {
   static route() => MaterialPageRoute(
         builder: (context) => const StartPage(),

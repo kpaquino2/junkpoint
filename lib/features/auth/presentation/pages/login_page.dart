@@ -12,6 +12,9 @@ import 'package:junkpoint/features/auth/presentation/widgets/auth_field.dart';
 import 'package:junkpoint/features/orders/presentation/pages/orders_page.dart';
 import 'package:junkpoint/features/shops/presentation/pages/shops_page.dart';
 
+// TODO forgot password
+// TODO log in using other platorms
+
 class LogInPage extends StatefulWidget {
   static route() => MaterialPageRoute(
         builder: (context) => const LogInPage(),
