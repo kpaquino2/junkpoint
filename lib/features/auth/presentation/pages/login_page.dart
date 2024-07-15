@@ -67,10 +67,12 @@ class _LogInPageState extends State<LogInPage> {
                     if (state is AuthFailure) {
                       showSnackBar(context, state.message);
                     } else if (state is AuthSuccess) {
-                      if (state.uid.isLeft())
+                      if (state.uid.isLeft()) {
                         Navigator.push(context, ShopsPage.route());
-                      if (state.uid.isRight())
+                      }
+                      if (state.uid.isRight()) {
                         Navigator.push(context, OrdersPage.route());
+                      }
                     }
                   },
                   builder: (context, state) {
