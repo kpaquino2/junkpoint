@@ -8,6 +8,9 @@ import 'package:junkpoint/features/auth/presentation/pages/login_page.dart';
 import 'package:junkpoint/features/auth/presentation/pages/shop_signup_page.dart';
 
 class StartPage extends StatelessWidget {
+  static route() => MaterialPageRoute(
+        builder: (context) => const StartPage(),
+      );
   const StartPage({super.key});
 
   @override
@@ -18,25 +21,25 @@ class StartPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const SizedBox(height: 75),
+              const SizedBox(height: 65),
               const Text(
                 "JUNKPOINT",
                 style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: AppPalette.whiteColor),
               ),
               const Icon(
                 Icons.person,
                 color: AppPalette.whiteColor,
-                size: 280,
+                size: 250,
               ),
               const Text(
                 "What will you be using JunkPoint for?",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -67,7 +70,7 @@ class StartPage extends StatelessWidget {
                   )
                 ],
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 40),
               RichText(
                 text: TextSpan(
                   text: "Already have an account? ",

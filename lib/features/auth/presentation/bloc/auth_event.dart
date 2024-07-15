@@ -16,3 +16,17 @@ final class AuthSignUp extends AuthEvent {
     required this.role,
   });
 }
+
+final class AuthLogIn extends AuthEvent {
+  final String email;
+  final String password;
+
+  AuthLogIn({
+    required this.email,
+    required this.password,
+  });
+}
+
+final class AuthIsUserLoggedIn extends AuthEvent {}
+
+final class AuthLogOut extends AuthEvent {}

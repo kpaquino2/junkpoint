@@ -1,4 +1,4 @@
-import 'package:junkpoint/features/auth/domain/entities/client.dart';
+import 'package:junkpoint/core/common/entities/client.dart';
 
 class ClientModel extends Client {
   ClientModel({
@@ -13,7 +13,7 @@ class ClientModel extends Client {
     return ClientModel(
       id: map['id'] ?? '',
       email: map['email'] ?? '',
-      points: 0,
+      points: map['points'] ?? 0,
       address: map['address'] ?? '',
       name: map['name'] ?? '',
     );

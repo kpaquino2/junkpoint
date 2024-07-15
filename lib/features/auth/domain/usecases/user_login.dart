@@ -5,32 +5,23 @@ import 'package:junkpoint/core/common/entities/client.dart';
 import 'package:junkpoint/core/common/entities/shop.dart';
 import 'package:junkpoint/features/auth/domain/repository/auth_repository.dart';
 
-class UserSignUp implements UseCase<Either<Client, Shop>, UserSignUpParams> {
+class UserLogIn implements UseCase<Either<Client, Shop>, UserLogInParams> {
   final AuthRepository authRepository;
-  const UserSignUp(this.authRepository);
+  const UserLogIn(this.authRepository);
 
   @override
   Future<Either<Failure, Either<Client, Shop>>> call(
-      UserSignUpParams params) async {
-    return await authRepository.signUpWithEmailPassword(
-      name: params.name,
+      UserLogInParams params) async {
+    return await authRepository.logInWithEmailPassword(
       email: params.email,
       password: params.password,
-      role: params.role,
     );
   }
 }
 
-class UserSignUpParams {
+class UserLogInParams {
   final String email;
   final String password;
-  final String name;
-  final String role;
 
-  UserSignUpParams({
-    required this.email,
-    required this.password,
-    required this.name,
-    required this.role,
-  });
+  UserLogInParams({required this.email, required this.password});
 }

@@ -1,4 +1,4 @@
-import 'package:junkpoint/features/auth/domain/entities/shop.dart';
+import 'package:junkpoint/core/common/entities/shop.dart';
 
 class ShopModel extends Shop {
   ShopModel({

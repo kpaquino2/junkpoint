@@ -9,14 +9,14 @@ class GreenCirclePainter extends CustomPainter {
     Paint paint = Paint();
 
     Path rectPath = Path();
-    rectPath.addRect(Rect.fromLTRB(0, 0, width, height * 0.3));
+    rectPath.addRect(Rect.fromLTRB(0, 0, width, height * 0.21));
     paint.color = AppPalette.mainColor;
     canvas.drawPath(rectPath, paint);
 
     Path arcPath = Path();
-    arcPath.moveTo(-width * 0.3, height * 0.3);
+    arcPath.moveTo(-width * 0.21, height * 0.21);
     arcPath.quadraticBezierTo(
-        width / 2, height / 2, width + width * 0.3, height * 0.3);
+        width / 2, height / 2, width + width * 0.21, height * 0.21);
     canvas.drawPath(arcPath, paint);
   }
 

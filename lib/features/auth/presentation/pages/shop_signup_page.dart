@@ -8,6 +8,7 @@ import 'package:junkpoint/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:junkpoint/features/auth/presentation/pages/login_page.dart';
 import 'package:junkpoint/features/auth/presentation/widgets/auth_button.dart';
 import 'package:junkpoint/features/auth/presentation/widgets/auth_field.dart';
+import 'package:junkpoint/features/shops/presentation/pages/shops_page.dart';
 
 class ShopSignUpPage extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -54,6 +55,8 @@ class _ShopSignUpPageState extends State<ShopSignUpPage> {
           listener: (context, state) {
             if (state is AuthFailure) {
               showSnackBar(context, state.message);
+            } else if (state is AuthSuccess) {
+              Navigator.push(context, ShopsPage.route());
             }
           },
           builder: (context, state) {
