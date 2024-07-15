@@ -9,7 +9,6 @@ import 'package:junkpoint/features/auth/presentation/pages/login_page.dart';
 import 'package:junkpoint/features/auth/presentation/widgets/auth_button.dart';
 import 'package:junkpoint/features/auth/presentation/widgets/auth_field.dart';
 import 'package:junkpoint/features/orders/presentation/pages/orders_page.dart';
-import 'package:junkpoint/features/shops/presentation/pages/shops_page.dart';
 
 class ShopSignUpPage extends StatefulWidget {
   static route() => MaterialPageRoute(
