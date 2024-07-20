@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:junkpoint/core/common/widgets/loader.dart';
 import 'package:junkpoint/core/theme/app_palette.dart';
 import 'package:junkpoint/core/utils/show_snackbar.dart';
@@ -8,6 +9,7 @@ import 'package:junkpoint/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:junkpoint/features/auth/presentation/pages/login_page.dart';
 import 'package:junkpoint/features/auth/presentation/widgets/auth_button.dart';
 import 'package:junkpoint/features/auth/presentation/widgets/auth_field.dart';
+import 'package:junkpoint/features/auth/presentation/widgets/auth_other_button.dart';
 import 'package:junkpoint/features/orders/presentation/pages/orders_page.dart';
 
 class ShopSignUpPage extends StatefulWidget {
@@ -22,15 +24,19 @@ class ShopSignUpPage extends StatefulWidget {
 
 class _ShopSignUpPageState extends State<ShopSignUpPage> {
   final nameController = TextEditingController();
-
-  final emailController = TextEditingController();
+  final credentialController = TextEditingController();
   final passwordController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
+  bool emailMode = true;
+
   @override
   void dispose() {
-    emailController.dispose();
+    credentialController.dispose();
+    nameController.dispose();
+    passwordController.dispose();
+
     super.dispose();
   }
 
@@ -81,7 +87,8 @@ class _ShopSignUpPageState extends State<ShopSignUpPage> {
                         hintText: "Shop Name", controller: nameController),
                     const SizedBox(height: 15),
                     AuthField(
-                        hintText: "Email Address", controller: emailController),
+                        hintText: emailMode ? "Email Address" : "Phone Number",
+                        controller: credentialController),
                     const SizedBox(height: 15),
                     AuthField(
                       hintText: "Password",
@@ -90,14 +97,15 @@ class _ShopSignUpPageState extends State<ShopSignUpPage> {
                     ),
                     const SizedBox(height: 15),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                       child: AuthButton(
                         buttonText: "Sign Up",
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             context.read<AuthBloc>().add(
                                   AuthSignUp(
-                                    email: emailController.text.trim(),
+                                    credential:
+                                        credentialController.text.trim(),
                                     name: nameController.text.trim(),
                                     password: passwordController.text.trim(),
                                     role: "shop",
@@ -107,7 +115,55 @@ class _ShopSignUpPageState extends State<ShopSignUpPage> {
                         },
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin:
+                                const EdgeInsets.only(left: 10.0, right: 20.0),
+                            child: const Divider(
+                              color: AppPalette.borderColor,
+                              height: 48,
+                            ),
+                          ),
+                        ),
+                        const Text("or"),
+                        Expanded(
+                          child: Container(
+                            margin:
+                                const EdgeInsets.only(left: 20.0, right: 10.0),
+                            child: const Divider(
+                              color: AppPalette.borderColor,
+                              height: 48,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    AuthOtherButton(
+                      provider: emailMode ? "Phone Number" : "Email Address",
+                      icon: emailMode
+                          ? FontAwesomeIcons.phone
+                          : FontAwesomeIcons.solidEnvelope,
+                      onPressed: () {
+                        setState(() {
+                          emailMode = !emailMode;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 15),
+                    AuthOtherButton(
+                      provider: "Google",
+                      icon: FontAwesomeIcons.google,
+                      onPressed: () {},
+                    ),
+                    const SizedBox(height: 15),
+                    AuthOtherButton(
+                      provider: "Facebook",
+                      icon: FontAwesomeIcons.facebook,
+                      onPressed: () {},
+                    ),
+                    const SizedBox(height: 20),
                     RichText(
                       text: TextSpan(
                         text: "Already have an account? ",
@@ -135,7 +191,7 @@ class _ShopSignUpPageState extends State<ShopSignUpPage> {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

@@ -6,7 +6,7 @@ import 'package:junkpoint/core/common/entities/shop.dart';
 abstract interface class AuthRepository {
   Future<Either<Failure, Either<Client, Shop>>> signUpWithEmailPassword({
     required String name,
-    required String email,
+    required String credential,
     required String password,
     required String role,
   });

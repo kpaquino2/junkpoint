@@ -14,7 +14,7 @@ class UserSignUp implements UseCase<Either<Client, Shop>, UserSignUpParams> {
       UserSignUpParams params) async {
     return await authRepository.signUpWithEmailPassword(
       name: params.name,
-      email: params.email,
+      credential: params.credential,
       password: params.password,
       role: params.role,
     );
@@ -22,13 +22,13 @@ class UserSignUp implements UseCase<Either<Client, Shop>, UserSignUpParams> {
 }
 
 class UserSignUpParams {
-  final String email;
+  final String credential;
   final String password;
   final String name;
   final String role;
 
   UserSignUpParams({
-    required this.email,
+    required this.credential,
     required this.password,
     required this.name,
     required this.role,

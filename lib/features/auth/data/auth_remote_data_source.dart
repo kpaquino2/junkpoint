@@ -8,7 +8,7 @@ abstract interface class AuthRemoteDataSource {
   Session? get currentUserSession;
   Future<Either<ClientModel, ShopModel>> signUpWithEmailPassword({
     required String name,
-    required String email,
+    required String credential,
     required String password,
     required String role,
   });
@@ -33,13 +33,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Either<ClientModel, ShopModel>> signUpWithEmailPassword({
     required String name,
-    required String email,
+    required String credential,
     required String password,
     required String role,
   }) async {
     try {
       final response = await supabaseClient.auth.signUp(
-        email: email,
+        email: credential.startsWith("+") ? null : credential,
+        phone: credential.startsWith("+") ? credential : null,
         password: password,
         data: {
           'name': name,
@@ -51,8 +52,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw const ServerException("User is null!");
       }
 
-      if (role == 'client')
+      if (role == 'client') {
         return left(ClientModel.fromJSON(response.user!.toJson()));
+      }
       return right(ShopModel.fromJSON(response.user!.toJson()));
     } catch (e) {
       throw ServerException(e.toString());

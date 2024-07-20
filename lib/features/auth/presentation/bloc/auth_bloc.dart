@@ -58,7 +58,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onAuthSignUp(AuthSignUp event, Emitter<AuthState> emit) async {
     final res = await _userSignUp(
       UserSignUpParams(
-        email: event.email,
+        credential: event.credential,
         password: event.password,
         name: event.name,
         role: event.role,
