@@ -51,7 +51,7 @@ class _AuthFieldState extends State<AuthField> {
         }
         return null;
       },
-      obscureText: isPasswordHidden,
+      obscureText: widget.isObscureText && isPasswordHidden,
     );
   }
 }
