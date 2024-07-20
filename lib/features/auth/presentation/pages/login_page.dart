@@ -90,12 +90,14 @@ class _LogInPageState extends State<LogInPage> {
                             AuthField(
                               hintText: "Email Address",
                               controller: emailController,
+                              validate: false,
                             ),
                             const SizedBox(height: 20),
                             AuthField(
                               hintText: "Password",
                               controller: passwordController,
                               isObscureText: true,
+                              validate: false,
                             ),
                             const SizedBox(height: 20),
                             Padding(
