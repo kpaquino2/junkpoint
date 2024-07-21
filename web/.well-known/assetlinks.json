@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.example.junkpoint",
+      "sha256_cert_fingerprints": [
+        "E1:CB:6E:16:5E:44:9F:B3:70:83:04:B9:F3:D2:B9:8D:7C:74:37:CB:B9:EF:38:DE:EB:3A:59:04:DC:68:FA:59"
+      ]
+    }
+  }
+]
